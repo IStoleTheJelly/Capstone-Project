@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Cafe</title>
+    <link rel="stylesheet" href="cart.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="site-header container">
+    <h1 class="logo"><img src="Images/image.png" alt="Sunrise Cafe Logo"></h1>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ordering.html">Ordering</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul> 
+    </nav> 
+    <div class="icons">
+      <a href="cart.html" id="cart-link">
+        <i class="fa-sharp-duotone fa-solid fa-cart-shopping"></i> Cart (<span id="cart-count">0</span>)
+      </a>
+      <a href="#" id="login-btn" class="login-link">
+        <i class="fa-sharp-duotone fa-solid fa-user"></i> Login
+      </a>
+      <div id="login-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content">
+          <span class="close-btn" id="close-login">&times;</span>
+          <div class="popup-tabs">
+            <button id="show-login" class="active" type="button">Sign In</button>
+            <button id="show-signup" type="button">Sign Up</button>
+          </div>
+          <form id="login-form">
+            <h2>Sign In</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+          </form>
+          <form id="signup-form" style="display:none;">
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="submit">Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="cart-main container">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+    <div id="cart-empty" style="display:none;">
+      <p>Your cart is empty.</p>
+      <a href="ordering.html" class="btn">Order Now</a>
+    </div>
+    <div class="cart-total-row">
+      <strong>Total:</strong> <span id="cart-total">$0.00</span>
+    </div>
+    <button id="purchase-btn" class="btn" style="margin-top:2em;">Purchase</button>
+  </main>
+
+  <footer id="footer" class="site-footer container" aria-label="Site footer">
+    <!-- ...copy your footer code here... -->
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    // Cart page logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cartEmptyDiv = document.getElementById('cart-empty');
+      const cartTotalSpan = document.getElementById('cart-total');
+      const purchaseBtn = document.getElementById('purchase-btn');
+      let cart = JSON.parse(localStorage.getItem('cartList')) || [];
+
+      function renderCart() {
+        cartItemsDiv.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          cartEmptyDiv.style.display = 'block';
+          cartTotalSpan.textContent = '$0.00';
+          purchaseBtn.style.display = 'none';
+          return;
+        }
+        cartEmptyDiv.style.display = 'none';
+        purchaseBtn.style.display = 'inline-block';
+        cart.forEach((item, idx) => {
+          
+          let name, price;
+          if (typeof item === 'object' && item !== null && 'price' in item) {
+            name = item.name;
+            price = item.price;
+          } else {
+            name = item;
+            price = 0;
+          }
+          total += price;
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <span class="cart-item-name">${name}</span>
+            <span class="cart-item-price">${price ? `$${price.toFixed(2)}` : ''}</span>
+            <button class="remove-btn" data-idx="${idx}">Remove</button>
+          `;
+          cartItemsDiv.appendChild(div);
+        });
+        cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+      }
+
+      cartItemsDiv.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-btn')) {
+          const idx = parseInt(e.target.getAttribute('data-idx'));
+          cart.splice(idx, 1);
+          localStorage.setItem('cartList', JSON.stringify(cart));
+          localStorage.setItem('cartCount', cart.length);
+          renderCart();
+          const cartCountSpan = document.getElementById('cart-count');
+          if (cartCountSpan) cartCountSpan.textContent = cart.length;
+        }
+      });
+
+      purchaseBtn.addEventListener('click', function() {
+        if (cart.length === 0) return;
+        alert('Thank you for your purchase!');
+        cart = [];
+        localStorage.setItem('cartList', JSON.stringify(cart));
+        localStorage.setItem('cartCount', 0);
+        renderCart();
+        const cartCountSpan = document.getElementById('cart-count');
+        if (cartCountSpan) cartCountSpan.textContent = '0';
+      });
+
+      renderCart();
+    });
+  </script> 
+
+  <footer id="footer" class="site-footer container" aria-label="Site footer">
+      <div class="footer-inner">
+        <section class="footer-col brand">
+          <h2 class="footer-logo">
+            <img src="Images/image.png" alt="Sunrise Cafe Logo">
+          </h2>
+          <p class="footer-tagline">Coffee • Pastries • Breakfast</p>
+        </section>
+
+        <nav class="footer-col links" aria-label="Quick links">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ordering.html">Ordering</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#footer">Contact</a></li>
+          </ul>
+        </nav>
+
+        <section class="footer-col contact" aria-label="Contact">
+          <h3>Contact</h3>
+          <address>
+            123 Main St, Hometown, USA<br>
+            <a href="tel:+15551234567" class="footer-link">☎ (555) 123-4567</a><br>
+            <a href="mailto:hello@sunrisecafe.example" class="footer-link">✉ hello@sunrisecafe.example</a>
+          </address>
+          <p class="hours"><strong>Hours:</strong> Mon–Fri 7am–3pm • Sat–Sun 8am–2pm</p>
+        </section>
+      </div>
+
+      <div class="footer-bottom">
+        © <span id="sc-year"></span> Sunrise Café · All rights reserved
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

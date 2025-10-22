@@ -1,0 +1,409 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Comic Sans MS', sans-serif;
+    text-decoration: none; 
+} 
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    background: #faeddc;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.11); /* 10% darker than 0.1 */
+    height: 79px; 
+} 
+
+.main-nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0; 
+    font-weight: bold; 
+    font-size: large; 
+} 
+
+.main-nav a {
+    color: #8B4513; 
+    transition: background 0.2s, color 0.2s;
+}
+
+.main-nav a:active {
+    color: #e2bd79; 
+}
+
+
+.icons a,
+.icons a i {
+    color: #8B4513; 
+    transition: color 0.2s;
+}
+
+.icons a:active,
+.icons a:active i {
+    color: #e2bd79; 
+}
+
+.icons{
+    display: flex;
+    gap: 30px; 
+    align-items: center; 
+    padding-right: 100px; 
+    
+}
+
+.logo img {
+    height: 110px; 
+    width: auto; 
+    object-fit: contain;
+    vertical-align: middle; 
+    padding-left: 100px;
+}
+
+/* Popup overlay and content */
+.popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 2em 2em 1em 2em;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    min-width: 300px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px; right: 16px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #8B4513;
+}
+
+/* Tabs for switching forms */
+.popup-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    gap: 1em;
+}
+
+.popup-tabs button {
+    background: #fff8ee;
+    color: #8B4513;
+    border: 1px solid #8B4513;
+    border-radius: 6px 6px 0 0;
+    padding: 0.5em 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.popup-tabs button.active,
+.popup-tabs button:focus {
+    background: #8B4513;
+    color: #fff;
+    outline: none;
+}
+
+/* Forms */
+#login-form, #signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#login-form h2, #signup-form h2 {
+    text-align: center;
+    margin: 0 0 0.5em 0;
+}
+
+.popup-content input {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content button[type="submit"] {
+    padding: 0.5em;
+    border-radius: 4px;
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.popup-content button[type="submit"]:hover {
+    background: #F5F5DC;
+    color: #8B4513;
+}
+
+/* Smooth anchor scrolling */
+html { scroll-behavior: smooth; }
+
+/* Footer (match header palette) */
+.site-footer {
+  background: #faeddc;              /* same as header */
+  color: #8B4513;                    /* same as header text/icons */
+  border-top: 1px solid rgba(0,0,0,0.11);
+  margin-top: 40px;
+}
+.site-footer a { color: #8B4513; text-decoration: none; }
+.site-footer a:active { color: #e2bd79; }
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1.2fr 1fr 1.2fr;
+}
+
+.footer-col h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.footer-logo img {
+  height: 76px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-tagline { margin-top: 6px; opacity: .9; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { margin: 6px 0; }
+.footer-link:hover { text-decoration: underline; }
+.hours { margin-top: 8px; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(0,0,0,0.11);
+  text-align: center;
+  padding: 12px 16px;
+  font-size: .95rem;
+  opacity: .9;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-logo img { height: 64px; }
+}
+
+/* Make footer sit at bottom of viewport on short pages */
+html, body { height: 100%; }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Push footer down; it stays after content and moves up when content is long */
+.site-footer { margin-top: auto; }
+
+
+/* --- About page --- */
+.about { max-width: 1100px; margin: 24px auto 40px; padding: 0 16px; color:#4b2e19; }
+
+.about-hero h1 {
+  font-size: 2rem;
+  margin: 16px 0 8px;
+  color:#8B4513;
+}
+.about-hero .lead {
+  font-size: 1.05rem;
+  opacity: .9;
+  margin-bottom: 20px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: #fffdf8;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.card h2 {
+  font-size: 1.2rem;
+  color:#8B4513;
+  margin-bottom: 8px;
+}
+.card p { line-height: 1.5; }
+.bullets { margin: 8px 0 0 18px; }
+.bullets li { list-style: disc; margin: 6px 0; }
+
+.about-cta {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+.cta-card {
+  text-align: center;
+  background: #faeddc;
+  color: #4b2e19;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 18px 20px;
+  max-width: 720px;
+  width: 100%;
+}
+.btn {
+  display: inline-block;
+  background: #8B4513;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 6px;
+}
+.btn:active { background: #e2bd79; color:#4b2e19; }
+
+/* responsive */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+
+/* Make footer stay at bottom on short pages */
+html, body { height: 100%; }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+.site-footer { margin-top: auto; }
+
+/* Smooth anchor scrolling to #footer */
+html { scroll-behavior: smooth; }
+
+/* --- About page styles --- */
+.about { max-width: 1100px; margin: 24px auto 40px; padding: 0 16px; color:#4b2e19; }
+.about-hero h1 { font-size: 2rem; margin: 16px 0 8px; color:#8B4513; }
+.about-hero .lead { font-size: 1.05rem; opacity: .9; margin-bottom: 20px; }
+
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card {
+  background: #fffdf8;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.card h2 { font-size: 1.2rem; color:#8B4513; margin-bottom: 8px; }
+.card p { line-height: 1.5; }
+.bullets { margin: 8px 0 0 18px; }
+.bullets li { list-style: disc; margin: 6px 0; }
+
+.about-cta { margin-top: 24px; display: flex; justify-content: center; }
+.cta-card {
+  text-align: center;
+  background: #faeddc; color: #4b2e19;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 18px 20px;
+  max-width: 720px; width: 100%;
+}
+.btn {
+  display: inline-block; background: #8B4513; color: #fff;
+  padding: 8px 14px; border-radius: 8px; text-decoration: none; margin-top: 6px;
+}
+.btn:active { background: #e2bd79; color:#4b2e19; }
+
+/* Footer look (matches header) — include if not already added */
+.site-footer {
+  background: #faeddc; color: #8B4513;
+  border-top: 1px solid rgba(0,0,0,0.11); margin-top: 40px;
+}
+.site-footer a { color: #8B4513; text-decoration: none; }
+.site-footer a:active { color: #e2bd79; }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto; padding: 24px 16px;
+  display: grid; gap: 24px; grid-template-columns: 1.2fr 1fr 1.2fr;
+}
+.footer-col h3 { margin: 0 0 8px; font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; }
+.footer-logo img { height: 76px; width: auto; object-fit: contain; }
+.footer-tagline { margin-top: 6px; opacity: .9; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { margin: 6px 0; }
+.footer-link:hover { text-decoration: underline; }
+.hours { margin-top: 8px; }
+.footer-bottom {
+  border-top: 1px solid rgba(0,0,0,0.11);
+  text-align: center; padding: 12px 16px; font-size: .95rem; opacity: .9;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 800px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-logo img { height: 64px; }
+}
+
+/* === Full-page background ONLY on the About page === */
+html, body { min-height: 100%; }
+
+/* Enable the background on this page only */
+body.about-page { position: relative; }
+
+/* Image layer behind everything */
+body.about-page::before {
+  content: "";
+  position: fixed;        /* sticks to the viewport */
+  inset: 0;
+  z-index: -2;            /* behind content/header/footer */
+  background-image: url("Images/about.png"); /* exact file name */
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  background-attachment: scroll;     /* smoother across devices */
+}
+
+/* Soft tint overlay for readability */
+body.about-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;            /* above image, below content */
+  background: rgba(250, 237, 220, 0.68);
+  pointer-events: none;
+}
+
+/* Optional: let background softly show under bars */
+body.about-page .site-header,
+body.about-page .site-footer {
+  background: rgba(250, 237, 220, 0.88);
+  backdrop-filter: saturate(110%) blur(1px);
+}
+
+
+.cart-active {
+    background: #F5F5DC;
+    color: #8B4513 !important;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #e2bd79;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}

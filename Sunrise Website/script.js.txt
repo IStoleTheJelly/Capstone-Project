@@ -1,0 +1,93 @@
+'use strict';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    console.log('Script loaded and DOM is ready.');
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Cart logic with localStorage
+    const cartCountSpan = document.getElementById('cart-count');
+    const cartLink = document.getElementById('cart-link');
+    const orderButtons = document.querySelectorAll('.order-btn');
+
+    // Load cart items from localStorage
+    let cartList = JSON.parse(localStorage.getItem('cartList')) || [];
+    let cartCount = cartList.length;
+    if (cartCountSpan) cartCountSpan.textContent = cartCount;
+
+    if (cartLink) {
+        if (cartCount > 0) {
+            cartLink.classList.add('cart-active');
+        } else {
+            cartLink.classList.remove('cart-active');
+        }
+    }
+
+    orderButtons.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const itemName = btn.parentElement.querySelector('h3').textContent;
+            const itemPriceText = btn.parentElement.querySelector('.menu-price').textContent;
+            const itemPrice = parseFloat(itemPriceText.replace(/[^0-9.]/g, ''));
+            cartList.push({ name: itemName, price: itemPrice });
+            localStorage.setItem('cartList', JSON.stringify(cartList));
+            cartCount = cartList.length;
+            if (cartCountSpan) cartCountSpan.textContent = cartCount;
+            localStorage.setItem('cartCount', cartCount);
+            if (cartLink) cartLink.classList.add('cart-active');
+        });
+    });
+
+
+    const loginBtn = document.getElementById('login-btn');
+    const popup = document.getElementById('login-popup');
+    const closeBtn = document.getElementById('close-login');
+    const showLogin = document.getElementById('show-login');
+    const showSignup = document.getElementById('show-signup');
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function() {
+            popup.style.display = 'flex';
+            showLogin.classList.add('active');
+            showSignup.classList.remove('active');
+            loginForm.style.display = 'flex';
+            signupForm.style.display = 'none';
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
+    }
+
+    if (showLogin) {
+        showLogin.addEventListener('click', function() {
+            showLogin.classList.add('active');
+            showSignup.classList.remove('active');
+            loginForm.style.display = 'flex';
+            signupForm.style.display = 'none';
+        });
+    }
+
+    if (showSignup) {
+        showSignup.addEventListener('click', function() {
+            showSignup.classList.add('active');
+            showLogin.classList.remove('active');
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'flex';
+        });
+    }
+
+    if (popup) {
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+    }
+});
