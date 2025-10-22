@@ -1,0 +1,124 @@
+{% extends "template.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='ordering.css')}}">  
+{% endblock %}
+
+{% block body %}
+    <main class="ordering-menu container">
+        <h2 class="menu-title">Order Your Favorites</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="Images/croissant.jpg" alt="Croissant" class="menu-img">
+                <h3>Croissant</h3>
+                <p>Flaky, buttery pastry perfect for breakfast.</p>
+                <p class="menu-price">$2.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/scone.jpeg" alt="Scone" class="menu-img">
+                <h3>Scone</h3>
+                <p>Buttery scone with your choice of fruit.</p>
+                <p class="menu-price">$3.49</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/bagel.jpg" alt="Bagel" class="menu-img">
+                <h3>Bagel</h3>
+                <p>Bagel, served with cream cheese.</p>
+                <p class="menu-price">$2.49</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/blueberry.jpg" alt="Blueberry Muffin" class="menu-img">
+                <h3>Blueberry Muffin</h3>
+                <p>Sweet muffin loaded with fresh blueberries.</p>
+                <p class="menu-price">$2.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/applepie.jpg" alt="Apple Pie" class="menu-img">
+                <h3>Apple Pie</h3>
+                <p>Classic apple pie with a flaky crust.</p>
+                <p class="menu-price">$4.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/yogurt.png" alt="Yogurt Parfait" class="menu-img">
+                <h3>Yogurt Parfait</h3>
+                <p>Layers of yogurt, granola, and berries.</p>
+                <p class="menu-price">$3.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/oatmeal.jpg" alt="Oatmeal" class="menu-img">
+                <h3>Oatmeal</h3>
+                <p>Warm oatmeal with brown sugar and fruit.</p>
+                <p class="menu-price">$3.49</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/BaconandEgg.jpg" alt="Breakfast Sandwich" class="menu-img">
+                <h3>Breakfast Sandwich</h3>
+                <p>Egg, cheese, and bacon.</p>
+                <p class="menu-price">$4.49</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/pancakes.jpg" alt="Pancakes" class="menu-img">
+                <h3>Pancakes</h3>
+                <p>Stack of pancakes with maple syrup.</p>
+                <p class="menu-price">$4.29</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/quiche.jpg" alt="Quiche" class="menu-img">
+                <h3>Quiche</h3>
+                <p>Egg and cheese quiche with spinach.</p>
+                <p class="menu-price">$4.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/frenchtoast.jpg" alt="French Toast" class="menu-img">
+                <h3>French Toast</h3>
+                <p>Golden-brown French toast with syrup.</p>
+                <p class="menu-price">$4.29</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/smoothie.jpg" alt="Fruit Smoothie" class="menu-img">
+                <h3>Fruit Smoothie</h3>
+                <p>Fresh fruit blended into a cool smoothie.</p>
+                <p class="menu-price">$3.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/coffee.jpg" alt="Coffee" class="menu-img">
+                <h3>Fresh Brewed Coffee</h3>
+                <p>Hot, aromatic coffee.</p>
+                <p class="menu-price">$2.29</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/tea.jpg" alt="Herbal Tea" class="menu-img">
+                <h3>Herbal Tea</h3>
+                <p>Relaxing herbal tea blend, served hot.</p>
+                <p class="menu-price">$2.49</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/espresso.jpg" alt="Espresso" class="menu-img">
+                <h3>Espresso</h3>
+                <p>Rich, bold espresso shot.</p>
+                <p class="menu-price">$2.99</p>
+                <button class="order-btn">Order</button>
+            </div>
+            <div class="menu-item">
+                <img src="Images/chai.jpg" alt="Chai Latte" class="menu-img">
+                <h3>Chai Latte</h3>
+                <p>Spiced chai tea with steamed milk.</p>
+                <p class="menu-price">$3.29</p>
+                <button class="order-btn">Order</button>
+            </div>
+        </div>
+    </main>
+{% endblock %}

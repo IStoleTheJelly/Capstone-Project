@@ -1,0 +1,119 @@
+@import url('base.css');
+
+/* --- Homepage Specific Styles --- */
+.home-main {
+    margin: 2em auto;
+    max-width: 1000px;
+    padding-bottom: 2em;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.hero-logo {
+    width: 700px;
+    height: 900px;
+    object-fit: contain;
+    margin-bottom: 0em;
+    padding-top: 0;
+}
+
+.hero-title {
+    font-size: 2.5em;
+    color: #8B4513;
+    margin-bottom: 0.3em;
+}
+
+.hero-tagline {
+    font-size: 1.2em;
+    color: #5a3a1b;
+    margin-bottom: 1em;
+}
+
+.hero-order-btn {
+    display: inline-block;
+    background: #8B4513;
+    color: #fff;
+    padding: 0.7em 2em;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: background 0.2s, color 0.2s;
+}
+
+.hero-order-btn:hover {
+    background: #F5F5DC;
+    color: #8B4513;
+}
+
+.about-preview {
+    background: #fff8ee;
+    border-radius: 12px;
+    padding: 2em;
+    margin-bottom: 2em;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+}
+
+.about-link {
+    display: inline-block;
+    margin-top: 1em;
+    color: #8B4513;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.about-link:hover {
+    color: #e2bd79;
+}
+
+.featured-menu {
+    margin-bottom: 2em;
+}
+
+.menu-preview-grid {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+
+.menu-preview-item {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+    padding: 1em;
+    width: 160px;
+    text-align: center;
+}
+
+.menu-preview-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 0.5em;
+}
+
+.menu-link {
+    display: inline-block;
+    color: #8B4513;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.menu-link:hover {
+    color: #e2bd79;
+}
+
+.building-img {
+    width: 100%;
+    max-height: 400px;
+    border-bottom: 2px solid #e2bd79;
+}

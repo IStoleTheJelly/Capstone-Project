@@ -1,0 +1,44 @@
+@import url('base.css');
+
+/* --- Cart Page Specific Styles --- */
+.cart-main {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 2em;
+    background: #fff8ee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    margin-bottom: 1em;
+    padding: 1em 2em;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(139,69,19,0.08);
+    gap: 2em;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    color: #8B4513;
+}
+
+.remove-btn {
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4em 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.remove-btn:hover {
+    background: #F5F5DC;
+    color: #8B4513;
+}

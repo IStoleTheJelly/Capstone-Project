@@ -1,0 +1,92 @@
+@import url('base.css');
+
+/* --- Ordering Page Specific Styles --- */
+.ordering-menu {
+    margin: 2em auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.menu-title {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #8B4513;
+}
+
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+}
+
+.menu-item {
+    background: #fff8ee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+    padding: 1.5em;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-height: 370px;
+}
+
+.menu-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    box-shadow: 0 1px 4px rgba(139,69,19,0.12);
+}
+
+.menu-item h3 {
+    margin: 0.5em 0 0.3em 0;
+    color: #8B4513;
+}
+
+.menu-item p {
+    font-size: 0.95em;
+    margin-bottom: 1em;
+    color: #5a3a1b;
+    flex: 1 1 auto;
+}
+
+.menu-price {
+    display: block;
+    font-size: 1.15em;
+    color: #8B4513;
+    font-weight: bold;
+    margin: 0.5em 0;
+    text-align: center;
+}
+
+.order-btn {
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6em 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 160px;
+}
+
+.order-btn:hover {
+    background: #F5F5DC;
+    color: #8B4513;
+}
+
+.order-btn:active {
+    background: #e2bd79;
+    color: #8B4513;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.18) inset;
+}

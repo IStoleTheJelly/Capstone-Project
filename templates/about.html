@@ -1,0 +1,97 @@
+{% extends "template.html" %}
+{% block head %}
+  <title>Sunrise Cafe — About</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='about.css')}}">
+{% endblock %}
+
+
+{% block bodyclass %}about-page{% endblock %}
+{% block body %}
+  <!-- ABOUT PAGE CONTENT -->
+  <main class="about container" aria-label="About Sunrise Café">
+    <section class="about-hero">
+      <h1>About Sunrise Café</h1>
+      <p class="lead">
+        We’re a small, family-run café serving fresh coffee, flaky pastries, and simple, honest food.
+        Our goal is to make mornings brighter—one cup, one smile at a time.
+      </p>
+    </section>
+
+    <section class="about-grid">
+      <article class="card">
+        <h2>Who We Are</h2>
+        <p>
+          Sunrise Café started as a weekend pop-up with a borrowed espresso machine and a lot of heart.
+          Today, we’re a local hangout where students, neighbors, and early-birds fuel up, catch up,
+          and slow down for a minute. We keep things friendly, fast, and consistent.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>What We Believe</h2>
+        <p>
+          Good coffee is simple, not complicated. We focus on quality ingredients, kind service,
+          and a menu that’s easy to love. If it doesn’t taste great or make your day easier,
+          it’s not on our menu.
+        </p>
+        <ul class="bullets">
+          <li><strong>Warm & welcoming:</strong> Everyone’s a regular here.</li>
+          <li><strong>Consistent quality:</strong> If we can’t do it well, we don’t do it.</li>
+          <li><strong>Time matters:</strong> Great coffee, without the wait.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>What We Make</h2>
+        <p>
+          House drip, velvety lattes, seasonal specials, and cold brew on hot days.
+          Fresh bakes every morning—croissants, muffins, banana bread—and quick bites like paninis and wraps.
+        </p>
+        <ul class="bullets">
+          <li>Signature Latte (ask about the seasonal flavor!)</li>
+          <li>Cold Brew 16oz</li>
+          <li>Butter & Chocolate Croissants</li>
+          <li>Turkey Pesto & Caprese Paninis</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>How We Source</h2>
+        <p>
+          We partner with regional roasters and local bakeries for fresh products delivered daily.
+          Our aim is simple—keep it local when possible and always keep it fresh.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Community & Sustainability</h2>
+        <p>
+          We donate unsold pastries to neighborhood mutual-aid fridges and offer a discount when you
+          bring a reusable cup. Small steps add up.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>What’s Next</h2>
+        <p>
+          We’re building an online ordering & inventory system to speed up pickups and keep popular
+          items in stock. That means shorter lines, fewer phone orders, and more time for you.
+        </p>
+      </article>
+    </section>
+
+    <section class="about-cta">
+      <div class="cta-card">
+        <h3>Visit Us</h3>
+        <p>123 Main St, Hometown, USA • Mon–Fri 7am–3pm • Sat–Sun 8am–2pm</p>
+        <p>
+          Questions? <a href="mailto:hello@sunrisecafe.example">hello@sunrisecafe.example</a> •
+          <a href="tel:+15551234567">(555) 123-4567</a>
+        </p>
+        <p><a class="btn" href="{{url_for('ordering')}}">Order Online</a></p>
+      </div>
+    </section>
+  </main>
+{% endblock %}
+  
+

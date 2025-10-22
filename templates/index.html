@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">  
+{% endblock %}
+{% block body %}
+    <main class="home-main container">
+        <section class="hero">
+            <h1 class="hero-title">Welcome to Sunrise Cafe</h1>
+            <p class="hero-tagline">Coffee • Pastries • Breakfast</p>
+            <a href="{{url_for('ordering')}}" class="hero-order-btn">Order Now</a>
+        </section>
+        <section class="about-preview">
+            <h2>About Us</h2>
+            <p>
+                Sunrise Cafe is your neighborhood spot for fresh coffee, delicious pastries, and hearty breakfast favorites. 
+                We pride ourselves on friendly service and a cozy atmosphere. Whether you’re grabbing a quick bite or relaxing with friends, 
+                we’re here to brighten your morning!
+            </p>
+            <a href="{{url_for('about')}}" class="about-link">Learn More</a>
+        </section>
+        <section class="featured-menu">
+            <h2>Featured Menu Items</h2>
+            <div class="menu-preview-grid">
+                <div class="menu-preview-item">
+                    <img src="Images/croissant.jpg" alt="Croissant">
+                    <h3>Croissant</h3>
+                </div>
+                <div class="menu-preview-item">
+                    <img src="Images/coffee.jpg" alt="Coffee">
+                    <h3>Fresh Brewed Coffee</h3>
+                </div>
+                <div class="menu-preview-item">
+                    <img src="Images/blueberry.jpg" alt="Blueberry Muffin">
+                    <h3>Blueberry Muffin</h3>
+                </div>
+                <div class="menu-preview-item">
+                    <img src="Images/bagel.jpg" alt="Bagel">
+                    <h3>Bagel</h3>
+                </div>
+            </div>
+            <a href="{{url_for('ordering')}}"" class="menu-link">See Full Menu</a>
+        </section>
+    </main>
+{% endblock %}
