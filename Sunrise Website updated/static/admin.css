@@ -1,0 +1,62 @@
+@import url('cart.css');
+.admin-main {
+    max-width: 900px;
+    margin: 2em auto;
+    padding: 2em;
+    background: #fff8ee;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(139,69,19,0.08);
+}
+
+.admin-main h1 {
+    color: #8B4513;
+    margin-bottom: 1em;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inventory-table th, .inventory-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #faeddc;
+}
+
+.inventory-table th {
+    background: #faeddc;
+    color: #8B4513;
+}
+
+.inventory-table td:last-child {
+    width: 200px;
+}
+
+.stock-form {
+    display: flex;
+    gap: 10px;
+}
+
+.stock-input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.stock-btn {
+    background: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.stock-btn:hover {
+    background: #F5F5DC;
+    color: #8B4513;
+}

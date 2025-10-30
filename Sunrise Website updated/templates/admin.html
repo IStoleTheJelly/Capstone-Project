@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+{% block head %}
+  <link rel="stylesheet" href="{{url_for('static', filename='admin.css')}}">
+{% endblock %}
+
+{% block body %}
+  <main class="admin-main container">
+    <h1>Inventory Management</h1>
+    
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Current Stock</th>
+          <th>Update Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td><strong>{{ product.name }}</strong><br><small>${{ "%.2f"|format(product.price) }}</small></td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <!-- Form to update stock for this specific product -->
+            <form class="stock-form" action="{{ url_for('update_stock') }}" method="POST">
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <input type="number" name="new_stock" class="stock-input" value="{{ product.stock }}" min="0">
+              <button type="submit" class="stock-btn">Save</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </main>
+{% endblock %}

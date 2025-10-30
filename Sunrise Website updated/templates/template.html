@@ -26,14 +26,25 @@
     </a>
 
     {% if current_user.is_authenticated %}
+      <!-- IF USER IS LOGGED IN -->
+      <!-- Is the user an admin? -->
+      {% if current_user.is_admin %}
+        <span class="nav-welcome">
+          Welcome, <a href="{{ url_for('admin') }}" class="admin-link">Admin</a>!
+        </span>
+      {% else %}
         <span class="nav-welcome">Welcome, {{ current_user.username }}!</span>
-        <a href="{{url_for('logout')}}" class="login-link">
-            <i class="fa-solid fa-sign-out-alt"></i> Logout
-        </a>
+      {% endif %}
+
+      <a href="{{url_for('logout')}}" class="login-link">
+        <i class="fa-solid fa-sign-out-alt"></i> Logout
+      </a>
+    
     {% else %}
-        <a href="#" id="login-btn" class="login-link">
-            <i class="fa-solid fa-user"></i> Login
-        </a>
+      <!-- IF USER IS LOGGED OUT -->
+      <a href="#" id="login-btn" class="login-link">
+        <i class="fa-solid fa-user"></i> Login
+      </a>
     {% endif %}
 
     <div id="login-popup" class="popup-overlay" style="display:none;">
@@ -99,8 +110,12 @@
         © <span id="sc-year"></span> Sunrise Café · All rights reserved
       </div>
     </footer>
+    <div id="toast-notification" class="toast">
+      <span id="toast-message"></span>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script> 
     {% block scripts %}{% endblock %}
   </body>
 </html>
