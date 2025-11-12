@@ -30,10 +30,12 @@
       <!-- Is the user an admin? -->
       {% if current_user.is_admin %}
         <span class="nav-welcome">
-          Welcome, <a href="{{ url_for('admin') }}" class="admin-link">Admin</a>!
+          Welcome, <a href="{{ url_for('admin') }}" class="admin-link">{{ current_user.username }}</a>!
         </span>
       {% else %}
-        <span class="nav-welcome">Welcome, {{ current_user.username }}!</span>
+        <span class="nav-welcome">
+          Welcome, <a href="{{ url_for('my_history') }}" class="admin-link">{{ current_user.username }}</a>!
+        </span>
       {% endif %}
 
       <a href="{{url_for('logout')}}" class="login-link">

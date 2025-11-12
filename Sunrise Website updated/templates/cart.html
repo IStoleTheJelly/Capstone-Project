@@ -17,5 +17,77 @@
     <button id="purchase-btn" class="btn" style="margin-top:2em;">Purchase</button>
   </main>
 {% endblock %}
+{% block scripts %}
+  <script>
+    // Cart page logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cartEmptyDiv = document.getElementById('cart-empty');
+      const cartTotalSpan = document.getElementById('cart-total');
+      const purchaseBtn = document.getElementById('purchase-btn');
+      let cart = JSON.parse(localStorage.getItem('cartList')) || [];
+
+      function renderCart() {
+        cartItemsDiv.innerHTML = '';
+        let total = 0;
+        if (cart.length === 0) {
+          cartEmptyDiv.style.display = 'block';
+          cartTotalSpan.textContent = '$0.00';
+          purchaseBtn.style.display = 'none';
+          return;
+        }
+        cartEmptyDiv.style.display = 'none';
+        purchaseBtn.style.display = 'inline-block';
+        cart.forEach((item, idx) => {
+          
+          let name, price;
+          if (typeof item === 'object' && item !== null && 'price' in item) {
+            name = item.name;
+            price = item.price;
+          } else {
+            name = item;
+            price = 0;
+          }
+          total += price;
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <span class="cart-item-name">${name}</span>
+            <span class="cart-item-price">${price ? `$${price.toFixed(2)}` : ''}</span>
+            <button class="remove-btn" data-idx="${idx}">Remove</button>
+          `;
+          cartItemsDiv.appendChild(div);
+        });
+        cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+      }
+
+      cartItemsDiv.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-btn')) {
+          const idx = parseInt(e.target.getAttribute('data-idx'));
+          cart.splice(idx, 1);
+          localStorage.setItem('cartList', JSON.stringify(cart));
+          localStorage.setItem('cartCount', cart.length);
+          renderCart();
+          const cartCountSpan = document.getElementById('cart-count');
+          if (cartCountSpan) cartCountSpan.textContent = cart.length;
+        }
+      });
+
+      purchaseBtn.addEventListener('click', function() {
+        if (cart.length === 0) return;
+        alert('Thank you for your purchase!');
+        cart = [];
+        localStorage.setItem('cartList', JSON.stringify(cart));
+        localStorage.setItem('cartCount', 0);
+        renderCart();
+        const cartCountSpan = document.getElementById('cart-count');
+        if (cartCountSpan) cartCountSpan.textContent = '0';
+      });
+
+      renderCart();
+    });
+  </script> 
+{% endblock %}
+
   
 

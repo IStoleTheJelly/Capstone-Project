@@ -107,7 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let cartList = JSON.parse(localStorage.getItem('cartList')) || [];
 
     function updateCartUI() {
-        let cartCount = cartList.length;
+        let currentCart = JSON.parse(localStorage.getItem('cartList')) || [];
+        let cartCount = currentCart.length;
         if (cartCountSpan) {
             cartCountSpan.textContent = cartCount;
         }
