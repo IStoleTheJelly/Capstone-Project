@@ -26,7 +26,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False) # Added admin flag
-
+    orders = db.relationship('Order', backref='user', lazy=True)
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
@@ -47,7 +47,7 @@ class Order(db.Model):
     total_price = db.Column(db.Float, nullable=False)
     
     # Foreign key to link to the User
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     
     # Relationship to link to OrderItems
     items = db.relationship('OrderItem', backref='order', lazy=True)
@@ -56,7 +56,7 @@ class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     item_name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    
+    quantity = db.Column(db.Integer, nullable=False)
     # Foreign key to link to the Order
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
 
@@ -138,7 +138,9 @@ def cart():
 @admin_required
 def admin():
     products = Product.query.order_by(Product.name).all()
-    return render_template('admin.html', products=products)
+    users = User.query.order_by(User.username).all()
+
+    return render_template('admin.html', products=products, users=users)
 
 @app.route('/admin/update_stock', methods=['POST'])
 @admin_required
@@ -212,10 +214,28 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+# --- Guest Order History Route ---
+@app.route('/history/guests')
+@login_required
+@admin_required
+def guest_history():
+    # Find all orders that have no user_id
+    orders = Order.query.filter_by(user_id=None).order_by(Order.order_date.desc()).all()
+    
+    #Guest user representation
+    class GuestUser:
+        username = "(Guest Orders)"
+        
+    guest_user = GuestUser()
+
+    # Re-use user_history.html template
+    return render_template('user_history.html', user=guest_user, orders=orders)
+
 # --- Purchase Route (With Inventory Logic) ---
 @app.route("/purchase", methods=['POST'])
-@login_required 
+
 def purchase():
+
     cart_data = request.get_json()
 
     if not cart_data:
@@ -235,11 +255,18 @@ def purchase():
                 return jsonify({'status': 'error', 'message': f'Sorry, {name} is no longer available.'}), 400
             elif product.stock < quantity:
                 return jsonify({'status': 'error', 'message': f'Sorry, we only have {product.stock} of {name} in stock.'}), 400
+        
+        # Determine the user ID (guests will be None)
+        user_id = None
+        if current_user.is_authenticated:
+            user_id = current_user.id
+
         # Create Order
         total = sum(item.get('price', 0) for item in cart_data)
-        new_order = Order(user_id=current_user.id, total_price=total)
+        
+        new_order = Order(user_id=user_id, total_price=total)
         db.session.add(new_order)
-        db.session.flush() 
+        db.session.flush()
 
         # Create OrderItems and NOW, decrement stock
         for name, quantity in item_quantities.items():
@@ -250,6 +277,7 @@ def purchase():
             order_item = OrderItem(
                 item_name=name,
                 price=product.price * quantity, # Total price for this line item
+                quantity=quantity,
                 order_id=new_order.id
             )
             db.session.add(order_item)
@@ -263,6 +291,34 @@ def purchase():
         # rollback if any errors occur
         db.session.rollback()
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# --- purchase history for admins ---
+@app.route('/history/<int:user_id>')
+@login_required
+@admin_required
+def user_history(user_id):
+    # Get the user
+    user = User.query.get_or_404(user_id)
+    
+    # Get all orders for that user, most recent first
+    # This works because your Order model has user_id
+    orders = Order.query.filter_by(user_id=user.id).order_by(Order.order_date.desc()).all()
+    
+    # Pass the user and their orders to the new template
+    return render_template('user_history.html', user=user, orders=orders)
+
+# --- purchase history for users ---
+@app.route('/my_history')
+@login_required  
+def my_history():
+    # The user is the one currently logged in
+    user = current_user
+    
+    # Find all orders for this specific user, most recent first
+    orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.order_date.desc()).all()
+    
+    
+    return render_template('user_history.html', user=user, orders=orders)
 
 # --- Run the App ---
 if __name__ == '__main__':

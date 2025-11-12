@@ -1,0 +1,72 @@
+{% extends "template.html" %}
+{% block head %}
+  <link rel="stylesheet" href="{{url_for('static', filename='admin.css')}}">
+{% endblock %}
+
+{% block body %}
+  <main class="admin-main container">
+    <h1>Purchase History for {{ user.username }}</h1>
+    
+    {% if not orders %}
+      <p>{{ user.username }} has not placed any orders.</p>
+    {% else %}
+      {% for order in orders %}
+        <div class="order-card">
+          <div class="order-header">
+            <h3>
+              Order #{{ order.id }} - Total: ${{ "%.2f"|format(order.total_price) }}
+            </h3>
+            <small class="utc-timestamp" data-utc-date="{{ order.order_date.isoformat() }}">
+              Placed on: ...
+            </small>
+          </div>
+          <div class="order-body">
+            <strong>Items:</strong>
+            <ul>
+              {% for item in order.items %}
+                <li>
+                  {{ item.item_name }} (x{{ item.quantity }}) - ${{ "%.2f"|format(item.price) }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </main>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all the timestamp elements
+    const timestampElements = document.querySelectorAll('.utc-timestamp');
+
+    // Loop through each one
+    timestampElements.forEach(function(element) {
+      //  Get the UTC date string
+      const utcString = element.dataset.utcDate;
+
+      //  Convert it to a Date object
+      const date = new Date(utcString);
+
+      // Set the options
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      };
+
+      // 
+      const localTime = date.toLocaleString('en-US', options);
+
+      // Update the text on the page
+      element.textContent = 'Placed on: ' + localTime;
+    });
+  });
+</script>
+{% endblock %}

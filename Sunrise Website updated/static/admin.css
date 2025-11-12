@@ -60,3 +60,57 @@
     background: #F5F5DC;
     color: #8B4513;
 }
+.admin-nav {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid #faeddc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.admin-nav-btn {
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 6px;
+  background: #f0e6d6;
+  color: #8B4513;
+  font-weight: bold;
+  cursor: pointer;
+  border: none; 
+}
+.admin-nav-btn:hover {
+  background: #e2bd79;
+}
+.admin-nav-btn.active {
+  background: #8B4513;
+  color: #fff;
+}
+/*  hide the panel that is not active */
+.admin-panel {
+  display: none;
+}
+.admin-panel.active {
+  display: block;
+}
+/* Style for the order history */
+.order-card {
+  background: #fff;
+  border: 1px solid #faeddc;
+  border-radius: 8px;
+  margin-bottom: 1.5em;
+  box-shadow: 0 1px 4px rgba(139,69,19,0.08);
+}
+.order-header {
+  background: #faeddc;
+  padding: 12px;
+  border-bottom: 1px solid #faeddc;
+}
+.order-header h3 {
+  margin: 0;
+  color: #8B4513;
+}
+.order-body {
+  padding: 12px;
+}
+.order-body ul {
+  margin-left: 20px;
+}

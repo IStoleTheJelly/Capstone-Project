@@ -5,33 +5,111 @@
 
 {% block body %}
   <main class="admin-main container">
-    <h1>Inventory Management</h1>
-    
-    <table class="inventory-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Current Stock</th>
-          <th>Update Stock</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for product in products %}
-        <tr>
-          <td><strong>{{ product.name }}</strong><br><small>${{ "%.2f"|format(product.price) }}</small></td>
-          <td>{{ product.stock }}</td>
+    <!-- Navigation Buttons -->
+    <div class="admin-nav">
+        <button id="show-inventory" class="admin-nav-btn active">Manage Inventory</button>
+        <button id="show-users" class="admin-nav-btn">View Users</button>
+    </div>
+    <!-- Inventory Management -->
+    <div id="inventory-panel" class="admin-panel active">
+      <h1>Inventory Management</h1>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Current Stock</th>
+            <th>Update Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td><strong>{{ product.name }}</strong><br><small>${{ "%.2f"|format(product.price) }}</small></td>
+            <td>{{ product.stock }}</td>
+            <td>
+              <form class="stock-form" action="{{ url_for('update_stock') }}" method="POST">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="number" name="new_stock" class="stock-input" value="{{ product.stock }}" min="0">
+                <button type="submit" class="stock-btn">Save</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- User Management -->
+    <div id="users-panel" class="admin-panel">
+      <h1>User List</h1>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Admin?</th>
+            <th>View History</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td><strong>{{ user.username }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td>{{ "Yes" if user.is_admin else "No" }}</td>
+            <td>
+              <a href="{{ url_for('user_history', user_id=user.id) }}" class="stock-btn">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+          <tr style="background: #fff8ee;">
+          <td><strong>(Guest Orders)</strong></td>
+          <td>(no_username)</td>
+          <td>No</td>
           <td>
-            <!-- Form to update stock for this specific product -->
-            <form class="stock-form" action="{{ url_for('update_stock') }}" method="POST">
-              <input type="hidden" name="product_id" value="{{ product.id }}">
-              <input type="number" name="new_stock" class="stock-input" value="{{ product.stock }}" min="0">
-              <button type="submit" class="stock-btn">Save</button>
-            </form>
+            <a href="{{ url_for('guest_history') }}" class="stock-btn">View</a>
           </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </main>
+{% endblock %}
+
+
+{% block scripts %}
+  <script>
+   
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the navigation buttons
+      const showInventoryBtn = document.getElementById('show-inventory');
+      const showUsersBtn = document.getElementById('show-users');
+      
+      // Get the panels
+      const inventoryPanel = document.getElementById('inventory-panel');
+      const usersPanel = document.getElementById('users-panel');
+
+      // Set click listener for "Inventory" button
+      showInventoryBtn.addEventListener('click', function() {
+        // Show inventory
+        inventoryPanel.classList.add('active');
+        showInventoryBtn.classList.add('active');
+        
+        // Hide users
+        usersPanel.classList.remove('active');
+        showUsersBtn.classList.remove('active');
+      });
+
+      // Set click listener for "Users" button
+      showUsersBtn.addEventListener('click', function() {
+        // Show users
+        usersPanel.classList.add('active');
+        showUsersBtn.classList.add('active');
+        
+        // Hide inventory
+        inventoryPanel.classList.remove('active');
+        showInventoryBtn.classList.remove('active');
+      });
+    });
+  </script>
 {% endblock %}
